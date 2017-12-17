@@ -2,7 +2,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -58,6 +58,16 @@ public class Calc {
 			});
 			window.setVisible(true);
 			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+			
 	}
-
+	
+	int [] generateRandomNumbers(){
+		int tab[] = new int[20];
+		Random randomNUmber = new Random();
+		for (int i = 0; i < tab.length ; i++)
+		{
+			tab[i] = randomNUmber.nextInt(100);
+		}
+		return tab;
+	}
 }
