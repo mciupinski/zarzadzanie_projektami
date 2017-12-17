@@ -1,13 +1,7 @@
-
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
-
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -53,84 +47,4 @@ public class Calc {
 			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	}
 
-}
-
-class Pesel
-{
-	static private String peselNrString = "00000000000";
-	static int[] peselNrIntArray;
-	
-	Pesel(String pesel)
-	{
-		setPeselNr(pesel);
-	}
-	
-	public String getPeselNr() {
-		return peselNrString;
-	}
-	public void setPeselNr(String peselNr) {
-		peselNrString = peselNr;	
-	}
-	static boolean isPeselValid(String pesel)
-	{
-		if (String.valueOf(pesel).length() == 11)
-		{
-			peselNrIntArray = new int [pesel.length()];
-			for (int i=0; i < pesel.length(); i++)
-			{
-				try
-				{
-				peselNrIntArray[i] = Integer.parseInt(pesel.substring(i, i+1));
-				}
-				catch (NumberFormatException parsingExep)
-				{
-					return false;
-				}
-			}
-			if(((9 * peselNrIntArray[0] +
-				 7 * peselNrIntArray[1] +
-				 3 * peselNrIntArray[2] +
-				 1 * peselNrIntArray[3] +
-				 9 * peselNrIntArray[4] +
-				 7 * peselNrIntArray[5] +
-				 3 * peselNrIntArray[6] +
-				 1 * peselNrIntArray[7] +
-				 9 * peselNrIntArray[8] +
-				 7 * peselNrIntArray[9]) % 10) == peselNrIntArray[10])
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	static public String getBithDate(String pesel) {
-		if ( (Integer.parseInt(pesel.substring(2,3)) == 2 || (Integer.parseInt(pesel.substring(2,3)) == 3)))
-		{
-			return ("20" + pesel.substring(0,2) + "-" + pesel.substring(2,4) + "-" + pesel.substring(4,6));
-		}
-		else
-		{
-			return ("19" + pesel.substring(0,2) + "-" + pesel.substring(2,4) + "-" + pesel.substring(4,6));	
-		}
-	}
-
-	static public String getSex(String pesel)
-	{
-		if (( Integer.parseInt(pesel.substring(9, 10)) % 2) != 0)
-		{
-			return "Mezczyzna";
-		}
-		else
-		{
-			return "Kobieta";
-		}
-	}
 }
