@@ -3,6 +3,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -20,36 +21,21 @@ public class Calc {
 		JTextField textfield = new JTextField("");
 		JTextField textfield2 = new JTextField("");
 		JTextField textfield3 = new JTextField("");
-
-		JComboBox cb1 = new JComboBox();
-		JComboBox cb2 = new JComboBox();
-
-		for (Integer i : numbersArray) {
-			cb1.addItem(i);
-		}
-
-		for (Integer i : generateRandomNumbers()) {
-			cb2.addItem(i);
-		}
-
-		textfield3.setEditable(false);
-		JButton button = new JButton("Sprawdz numer");
-
-		// Ustawienia okna
-		window.setMinimumSize(new Dimension(300, 200));
-		window.setLayout(new GridLayout(0, 1));
-
+		JComboBox cb1 = new JComboBox(numbersArray);
+		JComboBox cb2 = new JComboBox(generateRandomNumbers());
 		label[0] = new JLabel("Liczba 1 :");
 		label[1] = new JLabel("Liczba 2 :");
 		label[2] = new JLabel("Wynik :");
-		window.add(label[0]);
-		window.add(cb1);
-		window.add(label[1]);
-		window.add(cb2);
-		window.add(button);
+		JButton button = new JButton("Sprawdz numer");
 
-		window.add(label[2]);
-		window.add(textfield3);
+		textfield3.setEditable(false);
+
+		cb2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -59,16 +45,29 @@ public class Calc {
 				textfield3.setText(String.valueOf(a * b));
 			}
 		});
+
+		// Ustawienia okna
+		window.setMinimumSize(new Dimension(300, 200));
+		window.setLayout(new GridLayout(0, 1));
+
+		window.add(label[0]);
+		window.add(cb1);
+		window.add(label[1]);
+		window.add(cb2);
+		window.add(button);
+		window.add(label[2]);
+		window.add(textfield3);
+
 		window.setVisible(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
 
-	private static int[] generateRandomNumbers() {
-		int tab[] = new int[20];
-		Random randomNUmber = new Random();
+	private static Integer[] generateRandomNumbers() {
+		Integer tab[] = new Integer[20];
+		Random randomNumber = new Random();
 		for (int i = 0; i < tab.length; i++) {
-			tab[i] = randomNUmber.nextInt(100);
+			tab[i] = randomNumber.nextInt(100);
 		}
 		return tab;
 	}
