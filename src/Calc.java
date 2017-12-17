@@ -2,19 +2,32 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class Calc {
-	public static void main(String[] args) {	
+	public static void main(String[] args) {
+		
+			Integer[] numbersArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+		
 			// Tworzenie okna i kontrolek
 			JFrame window = new JFrame();
 			JLabel[] label = new JLabel[3];
 			JTextField textfield = new JTextField("");
 			JTextField textfield2 = new JTextField("");
 			JTextField textfield3 = new JTextField("");
+			
+			JComboBox cb1 = new JComboBox();
+			JComboBox cb2 = new JComboBox();
+			
+			for(Integer i : numbersArray) {
+				cb1.addItem(i);
+			}
+			
 			textfield3.setEditable(false);
 			JButton button = new JButton("Sprawdz numer");
 			
@@ -26,7 +39,7 @@ public class Calc {
 			label[1] = new JLabel("Liczba 2 :");
 			label[2] = new JLabel("Wynik :");
 			window.add(label[0]);
-			window.add(textfield);
+			window.add(cb1);
 			window.add(label[1]);
 			window.add(textfield2);
 			window.add(button);
@@ -38,7 +51,7 @@ public class Calc {
 				public void actionPerformed(ActionEvent e) 
 				{
 			
-					int a = Integer.parseInt(textfield.getText());
+					int a = (Integer) cb1.getSelectedItem();
 					int b = Integer.parseInt(textfield2.getText());
 					textfield3.setText(String.valueOf(a * b));
 				}
