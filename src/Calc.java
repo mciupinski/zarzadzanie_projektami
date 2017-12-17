@@ -28,6 +28,10 @@ public class Calc {
 			cb1.addItem(i);
 		}
 
+		for (Integer i : generateRandomNumbers()) {
+			cb2.addItem(i);
+		}
+
 		textfield3.setEditable(false);
 		JButton button = new JButton("Sprawdz numer");
 
@@ -41,7 +45,7 @@ public class Calc {
 		window.add(label[0]);
 		window.add(cb1);
 		window.add(label[1]);
-		window.add(textfield2);
+		window.add(cb2);
 		window.add(button);
 
 		window.add(label[2]);
@@ -51,7 +55,7 @@ public class Calc {
 			public void actionPerformed(ActionEvent e) {
 
 				int a = (Integer) cb1.getSelectedItem();
-				int b = Integer.parseInt(textfield2.getText());
+				int b = (Integer) cb2.getSelectedItem();
 				textfield3.setText(String.valueOf(a * b));
 			}
 		});
@@ -60,7 +64,7 @@ public class Calc {
 
 	}
 
-	int[] generateRandomNumbers() {
+	private static int[] generateRandomNumbers() {
 		int tab[] = new int[20];
 		Random randomNUmber = new Random();
 		for (int i = 0; i < tab.length; i++) {
