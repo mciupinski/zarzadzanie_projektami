@@ -5,16 +5,35 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="zarzadzanie_projektami">
     <property environment="env"/>
+    <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
+    <path id="JUnit 5.libraryclasspath">
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.junit.jupiter.api_5.0.0.v20170910-2246.jar"/>
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.junit.jupiter.engine_5.0.0.v20170910-2246.jar"/>
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.junit.jupiter.migrationsupport_5.0.0.v20170910-2246.jar"/>
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.junit.jupiter.params_5.0.0.v20170910-2246.jar"/>
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.junit.platform.commons_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.junit.platform.engine_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.junit.platform.launcher_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.junit.platform.runner_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.junit.platform.suite.api_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.junit.vintage.engine_4.12.0.v20170910-2246.jar"/>
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.opentest4j_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.apiguardian_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.junit_4.12.0.v201504281640/junit.jar"/>
+        <pathelement location="../../../../Programy/eclipse-java-oxygen-1a-win32-x86_64/eclipse/plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+    </path>
     <path id="zarzadzanie_projektami.classpath">
         <pathelement location="bin"/>
+        <path refid="JUnit 5.libraryclasspath"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
+                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -55,5 +74,30 @@
         <java classname="pl.com.zpi.Main" failonerror="true" fork="yes">
             <classpath refid="zarzadzanie_projektami.classpath"/>
         </java>
+    </target>
+    <target name="Stub_test_case">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="pl.com.zpi.test.Stub_test_case" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="zarzadzanie_projektami.classpath"/>
+        </junit>
+    </target>
+    <target name="zarzadzanie_projektami">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="zarzadzanie_projektami.classpath"/>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
     </target>
 </project>
