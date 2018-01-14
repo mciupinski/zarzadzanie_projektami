@@ -79,7 +79,7 @@
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-            <test name="pl.com.zpi.test.Stub_test_case" todir="${junit.output.dir}"/>
+            <test name="test.Stub_test_case" todir="${junit.output.dir}"/>
             <jvmarg line="-ea"/>
             <classpath refid="zarzadzanie_projektami.classpath"/>
         </junit>
