@@ -38,7 +38,7 @@ public class Main {
 		});
 
 		// Ustawienia okna
-		window.setMinimumSize(new Dimension(300, 200));
+		window.setMinimumSize(new Dimension(400, 300));
 		window.setLayout(new GridLayout(0, 1));
 
 		window.add(number1Label);
