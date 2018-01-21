@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="zarzadanie_proj" default="all">
+  
+  
+  <property file="build.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.maven:_junit:junit:4.12.classpath">
+    <pathelement location="${path.variable.maven_repository}/junit/junit/4.12/junit-4.12.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module zarzadzanie_projektami -->
+  
+  <dirname property="module.zarzadzanie_projektami.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.zarzadzanie_projektami" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.zarzadzanie_projektami" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.zarzadzanie_projektami" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.zarzadzanie_projektami" value="-encoding UTF-8 -source 1.5 -target 1.5 ${compiler.args}"/>
+  
+  <property name="zarzadzanie_projektami.output.dir" value="${module.zarzadzanie_projektami.basedir}/target/classes"/>
+  <property name="zarzadzanie_projektami.testoutput.dir" value="${module.zarzadzanie_projektami.basedir}/target/test-classes"/>
+  
+  <path id="zarzadzanie_projektami.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="zarzadzanie_projektami.module.production.classpath">
+    <path refid="${module.jdk.classpath.zarzadzanie_projektami}"/>
+  </path>
+  
+  <path id="zarzadzanie_projektami.runtime.production.module.classpath">
+    <pathelement location="${zarzadzanie_projektami.output.dir}"/>
+  </path>
+  
+  <path id="zarzadzanie_projektami.module.classpath">
+    <path refid="${module.jdk.classpath.zarzadzanie_projektami}"/>
+    <pathelement location="${zarzadzanie_projektami.output.dir}"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+  </path>
+  
+  <path id="zarzadzanie_projektami.runtime.module.classpath">
+    <pathelement location="${zarzadzanie_projektami.testoutput.dir}"/>
+    <pathelement location="${zarzadzanie_projektami.output.dir}"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.zarzadzanie_projektami">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.zarzadzanie_projektami">
+    <patternset refid="excluded.from.module.zarzadzanie_projektami"/>
+  </patternset>
+  
+  <path id="zarzadzanie_projektami.module.sourcepath">
+    <dirset dir="${module.zarzadzanie_projektami.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="zarzadzanie_projektami.module.test.sourcepath">
+    <dirset dir="${module.zarzadzanie_projektami.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.zarzadzanie_projektami" depends="compile.module.zarzadzanie_projektami.production,compile.module.zarzadzanie_projektami.tests" description="Compile module zarzadzanie_projektami"/>
+  
+  <target name="compile.module.zarzadzanie_projektami.production" depends="register.custom.compilers" description="Compile module zarzadzanie_projektami; production classes">
+    <mkdir dir="${zarzadzanie_projektami.output.dir}"/>
+    <javac2 destdir="${zarzadzanie_projektami.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.zarzadzanie_projektami}/javac">
+      <compilerarg line="${compiler.args.zarzadzanie_projektami}"/>
+      <bootclasspath refid="zarzadzanie_projektami.module.bootclasspath"/>
+      <classpath refid="zarzadzanie_projektami.module.production.classpath"/>
+      <src refid="zarzadzanie_projektami.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.zarzadzanie_projektami"/>
+    </javac2>
+    
+    <copy todir="${zarzadzanie_projektami.output.dir}">
+      <fileset dir="${module.zarzadzanie_projektami.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.zarzadzanie_projektami.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.zarzadzanie_projektami.tests" depends="register.custom.compilers,compile.module.zarzadzanie_projektami.production" description="compile module zarzadzanie_projektami; test classes" unless="skip.tests">
+    <mkdir dir="${zarzadzanie_projektami.testoutput.dir}"/>
+    <javac2 destdir="${zarzadzanie_projektami.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.zarzadzanie_projektami}/javac">
+      <compilerarg line="${compiler.args.zarzadzanie_projektami}"/>
+      <bootclasspath refid="zarzadzanie_projektami.module.bootclasspath"/>
+      <classpath refid="zarzadzanie_projektami.module.classpath"/>
+      <src refid="zarzadzanie_projektami.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.zarzadzanie_projektami"/>
+    </javac2>
+    
+    <copy todir="${zarzadzanie_projektami.testoutput.dir}">
+      <fileset dir="${module.zarzadzanie_projektami.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.zarzadzanie_projektami" description="cleanup module">
+    <delete dir="${zarzadzanie_projektami.output.dir}"/>
+    <delete dir="${zarzadzanie_projektami.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.zarzadzanie_projektami" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.zarzadzanie_projektami" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+</project>
